@@ -1,0 +1,7 @@
+# Example CNAME file for custom domain
+# To use a custom domain:
+# 1. Rename this file to CNAME
+# 2. Replace 'yourdomain.com' with your actual domain
+# 3. Configure your DNS to point to yourusername.github.io
+
+yourdomain.com

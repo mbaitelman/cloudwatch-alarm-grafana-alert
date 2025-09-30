@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS CloudWatch to Grafana Alert Translator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 AWS CloudWatch to Grafana Alert Translator</h1>
+            <p>Convert your CloudWatch alarms to Grafana alerts for Prometheus backends</p>
+        </header>
+
+        <main class="fullscreen-layout">
+            <div class="input-section">
+                <h2>Input: CloudWatch Alarm JSON</h2>
+                <div class="input-container">
+                    <textarea id="cloudWatchInput" placeholder='Paste your CloudWatch alarm JSON here...
+
+Example:
+{
+  "alarmName": "HighCPUUtilization",
+  "metricName": "CPUUtilization",
+  "namespace": "AWS/EC2",
+  "statistic": "Average",
+  "period": 300,
+  "threshold": 80.0,
+  "comparisonOperator": "GreaterThanThreshold",
+  "evaluationPeriods": 2,
+  "datapointsToAlarm": 2,
+  "dimensions": [
+    {"Name": "InstanceId", "Value": "i-1234567890abcdef0"}
+  ]
+}'></textarea>
+                </div>
+                
+                <div class="settings-section">
+                    <div class="setting-row">
+                        <label for="folderInput">Folder:</label>
+                        <input type="text" id="folderInput" value="CloudWatch Alerts" placeholder="Enter folder name">
+                    </div>
+                    
+                    <div class="setting-row">
+                        <label for="noDataStateSelect">No Data State:</label>
+                        <select id="noDataStateSelect">
+                            <option value="NoData">NoData</option>
+                            <option value="Alerting">Alerting</option>
+                            <option value="OK">OK</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-row">
+                        <label for="metricFormatSelect">Metric Format:</label>
+                        <select id="metricFormatSelect">
+                            <option value="yace">YACE</option>
+                            <option value="push_metric">Push Metric</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button id="translateBtn" class="translate-btn">Translate to Grafana Alert</button>
+                    <button id="exampleBtn" class="example-btn" onclick="populateExample()">Load Example</button>
+                    <button id="clearBtn" class="clear-btn" onclick="clearInput()">Clear</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>Output: Grafana Alert (YAML)</h2>
+                <div class="output-container">
+                    <pre id="grafanaAlert"></pre>
+                    <button id="copyBtn" class="copy-btn">Copy to Clipboard</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>All processing is done client-side in your browser. No data is sent to external servers.</p>
+        </footer>
+    </div>
+
+    <script src="alertTranslator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

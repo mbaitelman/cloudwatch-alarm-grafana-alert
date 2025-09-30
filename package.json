@@ -1,0 +1,32 @@
+{
+  "name": "cloudwatch-alarm-grafana-alert",
+  "version": "1.0.0",
+  "description": "A web application that translates AWS CloudWatch alarms to Grafana alerts using Prometheus backends",
+  "main": "alertTranslator.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "serve": "npx http-server . -p 8080 -o",
+    "lint": "eslint *.js tests/*.js",
+    "lint:fix": "eslint *.js tests/*.js --fix"
+  },
+  "keywords": [
+    "aws",
+    "cloudwatch",
+    "grafana",
+    "prometheus",
+    "alerts",
+    "monitoring"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
