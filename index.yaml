@@ -1,0 +1,40 @@
+# Example Grafana Alert Rule
+# This is the output format produced by the CloudWatch to Grafana Alert Translator
+# 
+# Input CloudWatch Alarm:
+# {
+#   "alarmName": "HighCPUUtilization",
+#   "metricName": "CPUUtilization",
+#   "namespace": "AWS/EC2",
+#   "statistic": "Average",
+#   "period": 300,
+#   "threshold": 80.0,
+#   "comparisonOperator": "GreaterThanThreshold",
+#   "evaluationPeriods": 2,
+#   "datapointsToAlarm": 2,
+#   "dimensions": [
+#     {"Name": "InstanceId", "Value": "i-1234567890abcdef0"}
+#   ]
+# }
+
+groups:
+- name: cloudwatch-alerts-alerts
+  interval: 1m
+  folder: CloudWatch Alerts
+  rules:
+  - alert: HighCPUUtilization
+    expr: avg_over_time(aws_ec2_cpu_utilization_percent{InstanceId="i-1234567890abcdef0"})
+    for: 10m
+    threshold: 80
+    condition: ">"
+    labels:
+      severity: warning
+      source: cloudwatch
+      namespace: AWS/EC2
+      metric: CPUUtilization
+      instanceid: i-1234567890abcdef0
+    annotations:
+      summary: HighCPUUtilization alert
+      description: CloudWatch alarm HighCPUUtilization for CPUUtilization in AWS/EC2
+      runbook_url: ""
+      dashboard_url: ""
